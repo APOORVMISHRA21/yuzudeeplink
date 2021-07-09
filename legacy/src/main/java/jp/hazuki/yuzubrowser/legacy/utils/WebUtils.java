@@ -87,7 +87,18 @@ public class WebUtils {
     public static void shareWeb(Context context, String url, String title) {
         if (url == null) return;
 
-        Intent intent = createShareWebIntent(url, title);
+        DynamicLink dynamicLink = FirebaseDynamicLinks.getInstance().createDynamicLink()
+            .setLink(Uri.parse(url))
+            .setDomainUriPrefix("https://yuzubrowserme.page.link")
+            // Open links with this app on Android
+            .setAndroidParameters(new DynamicLink.AndroidParameters.Builder().build())
+            // Open links with com.example.ios on iOS
+            .setIosParameters(new DynamicLink.IosParameters.Builder("com.example.ios").build())
+            .buildDynamicLink();
+
+        Uri dynamicLinkUri = dynamicLink.getUri();
+
+        Intent intent = createShareWebIntent(dynamicLinkUri.toString(), title);
         try {
             context.startActivity(Intent.createChooser(intent, context.getText(R.string.share)));
         } catch (ActivityNotFoundException e) {
