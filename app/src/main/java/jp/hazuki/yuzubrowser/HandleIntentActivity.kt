@@ -55,6 +55,30 @@ class HandleIntentActivity : FragmentActivity() {
     private fun handleIntent(intent: Intent) {
         val action = intent.action
 
+        if(Intent.ACTION_VIEW == action && intent.data!!.host.equals("yuzubrowserme.page.link") && intent.data!!.scheme.equals("https"))
+        {
+            FirebaseDynamicLinks.getInstance()
+                .getDynamicLink(intent)
+                .addOnSuccessListener(this) { pendingDynamicLinkData ->
+                    // Get deep link from result (may be null if no link is found)
+                    var deepLink: Uri? = null
+                    if (pendingDynamicLinkData != null) {
+                        deepLink = pendingDynamicLinkData.link
+                    }
+
+                    try {
+                        val openInNewTab = intent.getBooleanExtra(EXTRA_OPEN_FROM_YUZU, false)
+                        startBrowser(deepLink.toString(), openInNewTab, openInNewTab)
+                    } catch (e: BadParcelableException) {
+                        startBrowser(deepLink.toString(), window = false, openInNewTab = false)
+                    }
+
+                }
+                .addOnFailureListener(this) { e -> Log.w(TAG, "getDynamicLink:onFailure", e) }
+
+            return
+        }
+
         if (Intent.ACTION_VIEW == action) {
             var url = intent.dataString
             if (url.isNullOrEmpty())
