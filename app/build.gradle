@@ -1,0 +1,170 @@
+/*
+ * Copyright (C) 2017-2021 Hazuki
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'com.cookpad.android.plugin.license-tools'
+
+apply plugin: 'com.google.firebase.crashlytics'
+
+def gitHash = 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
+def buildTime = new Date().format("yyyy-MM-dd'T'HH:mm:ssXXX")
+
+android {
+    compileSdkVersion Build.compile_sdk_version
+    buildToolsVersion Build.build_tools_version
+    defaultConfig {
+        applicationId "jp.hazuki.yuzubrowser"
+        minSdkVersion Build.min_sdk_version
+        targetSdkVersion Build.target_sdk_version
+        versionCode AppVersions.version_code
+        versionName AppVersions.version_name
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "GIT_HASH", "\"${gitHash}\""
+        buildConfigField "String", "BUILD_TIME", "\"${buildTime}\""
+        resValue "string", "package_name", applicationId
+        resValue "string", "package_build", gitHash
+        resValue "string", "package_build_time", buildTime
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [crashlyticsCollectionEnabled:"true"]
+            lintOptions {
+                disable 'MissingTranslation', 'GoogleAppIndexingWarning', 'ClickableViewAccessibility'
+            }
+        }
+        debug {
+            ext.enableCrashlytics = false
+            ext.alwaysUpdateBuildId = false
+            applicationIdSuffix ".debug"
+            resValue "string", "package_name", "${defaultConfig.applicationId}.debug"
+            manifestPlaceholders = [crashlyticsCollectionEnabled:"false"]
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/CHANGES'
+        exclude 'META-INF/README.md'
+    }
+
+    applicationVariants.all { variant ->
+        if (variant.buildType.name == "release") {
+            variant.outputs.each { output ->
+                if (output.outputFileName.endsWith('.apk')) {
+                    // Rename APK
+                    def applicationId = defaultConfig.applicationId
+                    def versionCode = defaultConfig.versionCode
+                    def versionName = defaultConfig.versionName
+                    output.outputFileName = "${applicationId}_v${versionName}_${versionCode}.apk"
+                }
+            }
+        }
+    }
+
+    buildFeatures {
+        dataBinding true
+    }
+}
+
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+        maven { url "https://plugins.gradle.org/m2/" }
+        jcenter()
+        google()
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.31.2'
+        classpath 'gradle.plugin.com.cookpad.android.plugin:plugin:1.2.6'
+    }
+}
+
+repositories {
+    maven { url 'https://jitpack.io' }
+    mavenCentral()
+    google()
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation Libs.junit
+    androidTestImplementation Libs.espressoCore
+
+    implementation Libs.moshi
+    kapt Libs.moshiCodeGen
+    implementation Libs.okhttp
+
+    implementation AndroidX.appcompat
+    implementation AndroidX.fix_preference
+    implementation AndroidX.room
+    implementation AndroidX.documentFile
+    implementation AndroidX.design
+    implementation project(':libraries:asyncpermissions')
+    implementation project(':browser')
+    implementation project(':module:ui')
+    implementation project(':legacy')
+    implementation project(':module:core')
+    implementation project(':module:webview')
+    implementation project(':languages')
+    implementation project(':module:favicon')
+    implementation project(':module:download')
+    implementation project(':module:adblock')
+    implementation project(':module:bookmark')
+    implementation project(':module:history')
+    implementation project(':module:search')
+
+    implementation Libs.kotlin_stdlib
+
+    implementation Libs.dagger2
+    annotationProcessor Libs.dagger2_compiler
+    kapt Libs.dagger2_compiler
+    implementation Libs.dagger_android
+    implementation Libs.dagger_android_support
+    kapt Libs.dagger_android_processor
+
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:26.5.0')
+    implementation 'com.google.firebase:firebase-core'
+
+    implementation 'com.google.firebase:firebase-dynamic-links'
+    // Declare the dependencies for the Crashlytics and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+}
+
+    apply plugin: 'com.google.gms.google-services'
+
+    // must be after the plugin is applied otherwise no tasks will be found
+    android.applicationVariants.all { variant ->
+    def googleTask = tasks.findByName("process${variant.name.capitalize()}GoogleServices")
+    googleTask.enabled = "debug" != variant.name
+}

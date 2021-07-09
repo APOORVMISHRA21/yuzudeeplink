@@ -1,0 +1,18 @@
+{
+  "title": "ツールバー設定",
+  "snap": "ツールバーをスナップ",
+  "snap_info": "スクロールの終了時に、ツールバーが部分的にしか表示されない場合は、直近の「端」までスクロールが続行され、ツールバーが開閉します。<br>たとえば、ツールバーの25%が見えている場合、ツールバーは閉じられます。逆に75%が見えている場合、全て表示されます。",
+  "alpha_bottom": "下部バーのアルファ値",
+  "alpha_bottom_info": "透過率を0～255の範囲で設定できます",
+  "common": "バー共通設定",
+  "common_info_positioning": "位置決定の優先度(縦画面)",
+  "common_info_positioning_info": "数字が小さいほど優先して配置されます",
+  "common_info_size": "サイズ",
+  "common_info_size_info": "縦のサイズ",
+  "specific": "タブバー固有設定",
+  "specific_info_type": "タブの種類",
+  "specific_info_scrollable": "スクロールタイプ",
+  "specific_info_full": "全体タイプ",
+  "specific_info_tab_size": "タブのサイズ",
+  "specific_info_tab_width": "タブの横幅"
+}

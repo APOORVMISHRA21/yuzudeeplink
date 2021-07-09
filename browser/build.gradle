@@ -1,0 +1,109 @@
+/*
+ * Copyright (C) 2017-2021 Hazuki
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion Build.compile_sdk_version
+
+    defaultConfig {
+        minSdkVersion Build.min_sdk_version
+        targetSdkVersion Build.target_sdk_version
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    buildFeatures {
+        dataBinding true
+    }
+}
+
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    testImplementation Libs.junit
+    androidTestImplementation Libs.espressoCore
+    androidTestImplementation Libs.androidRunner
+
+    implementation AndroidX.appcompat
+    implementation AndroidX.design
+    implementation AndroidX.recyclerView
+    implementation AndroidX.constraintLayout
+    implementation AndroidX.fix_preference
+    implementation AndroidX.room
+    implementation AndroidX.print
+    implementation AndroidX.documentFile
+    implementation AndroidX.webkit
+    implementation AndroidX.swipeRefreshLayout
+
+    implementation Libs.okhttp
+    implementation Libs.okio
+    implementation Libs.moshi
+    kapt Libs.moshiCodeGen
+
+    implementation 'com.github.turing-tech:MaterialScrollBar:13.3.4'
+    implementation project(':libraries:asyncpermissions')
+    implementation project(':module:ui')
+    implementation project(':legacy')
+    implementation project(':module:core')
+    implementation project(':module:webview')
+    implementation project(':languages')
+    implementation project(':module:favicon')
+    implementation project(':module:download')
+    implementation project(':module:adblock')
+    implementation project(':module:bookmark')
+    implementation project(':module:connecter')
+    implementation project(':module:history')
+    implementation project(':module:search')
+
+    implementation Libs.kotlin_stdlib
+    implementation Libs.kotlin_coroutines
+    implementation Libs.kotlin_coroutines_android
+
+    implementation Libs.dagger2
+    annotationProcessor Libs.dagger2_compiler
+    kapt Libs.dagger2_compiler
+    implementation Libs.dagger_android
+    implementation Libs.dagger_android_support
+    kapt Libs.dagger_android_processor
+
+
+    implementation platform('com.google.firebase:firebase-bom:26.5.0')
+    implementation 'com.google.firebase:firebase-core'
+    implementation 'com.google.firebase:firebase-dynamic-links'
+}
+
+apply plugin: 'com.google.gms.google-services'

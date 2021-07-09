@@ -1,0 +1,18 @@
+{
+  "title": "Symbolleisteneinstellungen",
+  "snap": "Snap-Symbolleiste",
+  "snap_info": "Wenn die Symbolleiste nach einem Scroll-Ende nur teilweise sichtbar ist, wird sie angeklickt und bis zur nächsten Kante gescrollt.<br>Wenn beispielsweise die Symbolleiste nur die unteren 25% angezeigt bekommt, wird sie vollständig außerhalb des Bildschirms gescrollt. Umgekehrt, wenn seine Unterseite 75% sichtbar ist, dann wird er vollständig in die Symbolleiste gescrollt.",
+  "alpha_bottom": "Alpha-Kanal der unteren Symbolleiste",
+  "alpha_bottom_info": "Sie können den Transparenzbereich von 0 bis 255 einstellen",
+  "common": "Allgemeine Leisteneinstellungen",
+  "common_info_positioning": "Priorität der Positionierung",
+  "common_info_positioning_info": "Je kleiner die Zahl, desto höher die Priorität",
+  "common_info_size": "Größe",
+  "common_info_size_info": "Vertikale Größe",
+  "specific": "spezifische Reiter-Leisteneinstellungen",
+  "specific_info_type": "Reitertyp",
+  "specific_info_scrollable": "Scrollfähig",
+  "specific_info_full": "Vollständig",
+  "specific_info_tab_size": "Reitergröße",
+  "specific_info_tab_width": "Reiterbreite"
+}

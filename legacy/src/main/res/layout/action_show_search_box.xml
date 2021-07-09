@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    android:paddingStart="22dp"
+    android:paddingEnd="16dp">
+
+    <Spinner
+        android:id="@+id/tabTypeSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="48dp" />
+
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="@string/action_bottom_search_bar" />
+</LinearLayout>

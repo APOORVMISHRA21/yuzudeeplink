@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="testRunner" value="PLATFORM" />
+        <option name="disableWrapperSourceDistributionNotification" value="true" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="1.8" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/browser" />
+            <option value="$PROJECT_DIR$/buildSrc" />
+            <option value="$PROJECT_DIR$/languages" />
+            <option value="$PROJECT_DIR$/legacy" />
+            <option value="$PROJECT_DIR$/libraries" />
+            <option value="$PROJECT_DIR$/libraries/asyncpermissions" />
+            <option value="$PROJECT_DIR$/libraries/colorpicker" />
+            <option value="$PROJECT_DIR$/libraries/floatingactionbutton" />
+            <option value="$PROJECT_DIR$/module" />
+            <option value="$PROJECT_DIR$/module/adblock" />
+            <option value="$PROJECT_DIR$/module/bookmark" />
+            <option value="$PROJECT_DIR$/module/connecter" />
+            <option value="$PROJECT_DIR$/module/core" />
+            <option value="$PROJECT_DIR$/module/download" />
+            <option value="$PROJECT_DIR$/module/favicon" />
+            <option value="$PROJECT_DIR$/module/history" />
+            <option value="$PROJECT_DIR$/module/search" />
+            <option value="$PROJECT_DIR$/module/ui" />
+            <option value="$PROJECT_DIR$/module/webview" />
+          </set>
+        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
+        <option name="useQualifiedModuleNames" value="true" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

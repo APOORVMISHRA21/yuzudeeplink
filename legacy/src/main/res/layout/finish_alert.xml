@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/finish_mes" />
+
+        <CheckBox
+            android:id="@+id/closeallCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/close_all_tabs" />
+
+        <CheckBox
+            android:id="@+id/cacheCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/clear_cache" />
+
+        <CheckBox
+            android:id="@+id/cookieCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/clear_cookie" />
+
+        <CheckBox
+            android:id="@+id/databaseCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/clear_database" />
+
+        <CheckBox
+            android:id="@+id/passwordCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/clear_password" />
+
+        <CheckBox
+            android:id="@+id/formdataCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/clear_formdata" />
+
+        <CheckBox
+            android:id="@+id/faviconCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/clear_favicon" />
+
+        <CheckBox
+            android:id="@+id/deleteHistoryCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/delete_history" />
+
+        <CheckBox
+            android:id="@+id/deleteSearchQueryCheckBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/delete_search_query" />
+
+        <CheckBox
+            android:id="@+id/removeAllGeoPermissions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/remove_geo_permission" />
+    </LinearLayout>
+
+</ScrollView>
